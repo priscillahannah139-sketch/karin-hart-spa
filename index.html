@@ -830,13 +830,20 @@ function sendBooking(event){
   event.preventDefault();
 
   const f = event.target;
+  const button = document.getElementById("bookingButton");
+  const status = document.getElementById("bookingStatus");
+
+  button.textContent = "Preparing your request...";
+  button.disabled = true;
 
   const subject = encodeURIComponent(
-    "New Spa Booking Request — " + f.name.value
+    "Appointment Request — " + f.name.value
   );
 
   const body = encodeURIComponent(
-`New Booking Request
+`Hello Karin-hart Soft Blissful Harmony Spa,
+
+I would like to request an appointment.
 
 Name: ${f.name.value}
 Phone: ${f.phone.value}
@@ -847,11 +854,23 @@ Preferred Time: ${f.time.value}
 Session: ${f.session.value}
 
 Message:
-${f.message.value || "None"}`
+${f.message.value || "None"}
+
+Thank you.`
   );
 
-  window.location.href =
-    `mailto:karinhartmsmith04@gmail.com?subject=${subject}&body=${body}`;
+  status.style.display = "block";
+
+  setTimeout(function(){
+
+    window.location.href =
+      `mailto:karinhartmsmith04@gmail.com?subject=${subject}&body=${body}`;
+
+    button.textContent = "Request Appointment";
+    button.disabled = false;
+
+  }, 700);
+
 }
 
 </script>
